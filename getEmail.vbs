@@ -78,6 +78,9 @@ For Each email In outlookFolder.Items
 		textLog = email.body
 		WshShell.Run(pathVbsAppendLog + " " + pathLogFileName + " " + Chr(34) & textLog & Chr(34))
 
+		' 해당 메일 삭제
+		' email.Delete
+		
 	End IF
 Next
 
