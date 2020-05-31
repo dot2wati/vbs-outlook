@@ -97,3 +97,10 @@ else
 	msgbox grpMailBody
 
 End IF
+
+'Clear the memory
+Set WshShell = Nothing
+Set outlookApp = Nothing
+Set outlookMAPI = Nothing
+Set allEmails = Nothing
+Set objReg = Nothing
