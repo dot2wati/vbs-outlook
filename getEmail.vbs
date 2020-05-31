@@ -8,15 +8,15 @@
 Set WshShell = WScript.CreateObject("WScript.Shell")
 pathUserProfile = WshShell.ExpandEnvironmentStrings("%UserProfile%") 
 
-' 마지막 파라미터는 pathLogFileName으로 지정
+' 마지막 파라미터는 pathLogFileName 으로 지정
 if wscript.arguments.count > 0 then
 	lastArgNum = wscript.arguments.count - 1
-	
+
 end if
 
 ' 파라미터 개수 확인
 if wscript.arguments.count = 3 then 
-	'outlook 폴더, 찾을 문자, 로그파일경로
+	' outlook 폴더, 찾을 문자, 로그파일경로
 	folderOutlook = WScript.Arguments(0)
 	' 메일에 포함된 텍스트
 	findText = WScript.Arguments(1)
@@ -46,17 +46,14 @@ scriptdir = CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScri
 pathVbsAppendLog = scriptdir & "\" & "appendLog.vbs"
 
 ' 로그 남기기
-' 공백이 파라미터가 되므로 공백 제거함
 textLog = "실행 VBScript"
-textLog = Replace(textLog," ","_")
-
-' 호출
-WshShell.Run(pathVbsAppendLog + " " + pathLogFileName + " " + textLog)
+WshShell.Run(pathVbsAppendLog + " " + pathLogFileName + " " + Chr(34) & textLog & Chr(34))
 
 
 ' outlookApp
 Set outlookApp = CreateObject("Outlook.Application")
 Set outlookMAPI = outlookApp.GetNameSpace("MAPI")
+
 
 ' 받은편지함 폴더 > RPA > MDG2004
 navFolder = Split(folderOutlook,"\")
@@ -65,10 +62,13 @@ for each folderName in navFolder
 	Set outlookFolder = outlookFolder.Folders(folderName)
 next
 
+
 ' msgbox outlookFolder
 Set allEmails = outlookFolder.Items
-
 Dim grpMailBody
+
+textLog = "메일 읽기 시작"
+WshShell.Run(pathVbsAppendLog + " " + pathLogFileName + " " + Chr(34) & textLog & Chr(34))
 
 For Each email In outlookFolder.Items
 	if email.subject = findText Then
@@ -87,7 +87,7 @@ objReg.Pattern="^\s*,"
 grpMailBody = objReg.Replace(grpMailBody,"")
 
 
-IF wscript.arguments.count = 3 Then 
+IF wscript.arguments.count = 3 Then
 	WScript.StdOut.Write(grpMailBody)
 
 else
