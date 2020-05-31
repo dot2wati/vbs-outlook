@@ -1,8 +1,17 @@
-' ----------------------------------
+' ----------------------------------------------------------------------------------
 ' 로그남기는 VBScript
 ' VBScript Encoding EUC-KR
 ' 로그파일 Encoding UTF-8
-' ----------------------------------
+' ----------------------------------------------------------------------------------
+' 다른 VBS에서 호출하는 방법
+' WshShell 오브젝트 만들고
+' WshShell.Run 으로 원하는 VBS 호출
+' 파라미터는 " " 스페이스 1칸 으로 구분하여 전달 가능
+' 아래는 예시 
+
+' Set WshShell = WScript.CreateObject("WScript.Shell")
+' WshShell.Run(호출할vbs경로 + " " + 로그남길경로 + " " + 로그남길내용 )
+' ----------------------------------------------------------------------------------
 
 ' 파라미터 두개다 있는 경우
 if wscript.arguments.count = 2 then 
@@ -29,15 +38,11 @@ Set objFileToWrite = CreateObject("Scripting.FileSystemObject").OpenTextFile(pat
 writeData = "(" & Now & ") " & appendText 
 objFileToWrite.WriteLine(writeData)
 objFileToWrite.Close
+
+
+'Clear the memory
 Set objFileToWrite = Nothing
 
 
-' 다른 VBS에서 호출하는 방법
-' WshShell 오브젝트 만들고
-' WshShell.Run 으로 원하는 VBS 호출
-' 파라미터는 " " 스페이스 1칸 으로 구분하여 전달 가능
-' 아래는 예시 
 
-' Set WshShell = WScript.CreateObject("WScript.Shell")
-' WshShell.Run(호출할vbs경로 + " " + 로그남길경로 + " " + 로그남길내용 )
 
