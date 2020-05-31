@@ -1,7 +1,6 @@
 
-##### Automation Anywhere 에서 사용위함
-
-##### Files 설명
+## Automation Anywhere 에서 사용위함
+## Files 설명
 
 1. getEmail.vbs
     - Outlook에서 이메일 읽어들임 
