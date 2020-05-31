@@ -72,7 +72,7 @@ Dim grpMailBody
 
 For Each email In outlookFolder.Items
 	if email.subject = findText Then
-		grpMailBody = grpMailBody + "," email.body
+		grpMailBody = grpMailBody + "," + email.body
 		
 		' 로그 남기기 호출
 		textLog = email.body
@@ -81,8 +81,16 @@ For Each email In outlookFolder.Items
 	End IF
 Next
 
+' Regexp 첫 , 제거
+Set objReg=CreateObject("vbscript.regexp")
+objReg.Pattern="^\s*,"
+grpMailBody = objReg.Replace(grpMailBody,"")
+
+
 IF wscript.arguments.count = 3 Then 
 	WScript.StdOut.Write(grpMailBody)
+
 else
 	msgbox grpMailBody
+
 End IF
