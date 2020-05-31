@@ -24,7 +24,7 @@ if wscript.arguments.count = 3 then
 	pathLogFileName = Wscript.Arguments(lastArgNum)
 
 elseif wscript.arguments.count = 0 then
-	'파라미터 없음 테스트
+	' 파라미터 없음 > 테스트
 	msgbox "getEmail.vbs > Test (파라미터 없음) > 바탕화면\getEmailTest.log"
 	' 메일에 포함된 텍스트
 	findText = "MDG2004"
@@ -54,7 +54,7 @@ textLog = Replace(textLog," ","_")
 WshShell.Run(pathVbsAppendLog + " " + pathLogFileName + " " + textLog)
 
 
-'outlookApp
+' outlookApp
 Set outlookApp = CreateObject("Outlook.Application")
 Set outlookMAPI = outlookApp.GetNameSpace("MAPI")
 
@@ -68,17 +68,21 @@ next
 ' msgbox outlookFolder
 Set allEmails = outlookFolder.Items
 
-
+Dim grpMailBody
 
 For Each email In outlookFolder.Items
-
 	if email.subject = findText Then
-			textLog = email.body
-			' textLog = Replace(textLog," ","_")
-
-			' 호출
-			WshShell.Run(pathVbsAppendLog + " " + pathLogFileName + " " + Chr(34) & textLog & Chr(34))	
-			
+		grpMailBody = grpMailBody + "," email.body
+		
+		' 로그 남기기 호출
+		textLog = email.body
+		WshShell.Run(pathVbsAppendLog + " " + pathLogFileName + " " + Chr(34) & textLog & Chr(34))
 
 	End IF
 Next
+
+IF wscript.arguments.count = 3 Then 
+	WScript.StdOut.Write(grpMailBody)
+else
+	msgbox grpMailBody
+End IF
