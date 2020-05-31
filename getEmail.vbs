@@ -25,7 +25,7 @@ if wscript.arguments.count = 3 then
 
 elseif wscript.arguments.count = 0 then
 	'파라미터 없음 테스트
-	msgbox "파라미터 개수 0 > Test > 바탕화면\getEmailTest.log"
+	msgbox "getEmail.vbs > Test (파라미터 없음) > 바탕화면\getEmailTest.log"
 	' 메일에 포함된 텍스트
 	findText = "MDG2004"
 	' 메일위치
@@ -45,6 +45,7 @@ scriptdir = CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScri
 ' 로그남기는 vbs 파일 호출 
 pathVbsAppendLog = scriptdir & "\" & "appendLog.vbs"
 
+' 로그 남기기
 ' 공백이 파라미터가 되므로 공백 제거함
 textLog = "실행 VBScript"
 textLog = Replace(textLog," ","_")
@@ -68,41 +69,16 @@ next
 Set allEmails = outlookFolder.Items
 
 
-' vDate = 하루 전 날짜
-' Date 는 현재 날짜
-vDate = DateAdd("d",-1,Date)
-nowDate = Now()
-calcDateTime = DateAdd("h",-12,nowDate)
-
-' MsgBox nowDate & "  // " & calcDateTime
-' MsgBox vDate
-' MsgBox vDate > Date
-' MsgBox vDate > nowDate
-
-'vDate = clng(replace(vDate,"-",""))
-
-d=CDate(nowDate)
-' msgbox d
 
 For Each email In outlookFolder.Items
-	' MsgBox email.receivedtime & " // " & calcDateTime
-	' MsgBox email.receivedtime > calcDateTime
-	' MsgBox email.subject
-	intCount  = email.Attachments.Count
-	if email.subject = findText Then
-		
-		If email.receivedtime > calcDateTime Then
-			MsgBox email.body
-		End IF
-	End IF
-	' MsgBox email
-	' Set emailTime = email.ReceivedTime
-	
-	' if emailTime > calcDateTime Then
-		
-	' Else
-		
-	' End IF
 
-	' Exit For
+	if email.subject = findText Then
+			textLog = email.body
+			' textLog = Replace(textLog," ","_")
+
+			' 호출
+			WshShell.Run(pathVbsAppendLog + " " + pathLogFileName + " " + Chr(34) & textLog & Chr(34))	
+			
+
+	End IF
 Next
