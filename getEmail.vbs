@@ -7,22 +7,16 @@
 Set WshShell = WScript.CreateObject("WScript.Shell")
 pathUserProfile = WshShell.ExpandEnvironmentStrings("%UserProfile%") 
 
-' 마지막 파라미터는 pathLogFileName 으로 지정
-if wscript.arguments.count > 0 then
-	lastArgNum = wscript.arguments.count - 1
-
-end if
-
 ' 파라미터 개수 확인
-if wscript.arguments.count = 3 then 
+if WScript.arguments.count = 3 then 
 	' outlook 폴더, 찾을 문자, 로그파일경로
 	folderOutlook = WScript.Arguments(0)
 	' 메일에 포함된 텍스트
 	findText = WScript.Arguments(1)
 	' 메일위치
-	pathLogFileName = Wscript.Arguments(lastArgNum)
+	pathLogFileName = Wscript.Arguments(2)
 
-elseif wscript.arguments.count = 0 then
+elseif WScript.arguments.count = 0 then
 	' 파라미터 없음 > 테스트
 	msgbox "getEmail.vbs > Test (파라미터 없음) > 바탕화면\getEmailTest.log"
 	' 메일에 포함된 텍스트
@@ -32,7 +26,12 @@ elseif wscript.arguments.count = 0 then
 	pathLogFileName = pathUserProfile & "\Desktop\getEmailTest.log"
 	
 else
+	i = 0
 	msgbox "파라미터 개수 안맞음 > 종료"
+	for each arg in WScript.arguments
+		msgbox "파라미터(" & i & "): " & arg 
+		i = i + 1
+	next
 	WScript.Quit
 
 end if
