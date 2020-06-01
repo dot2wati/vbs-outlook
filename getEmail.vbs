@@ -95,12 +95,15 @@ grpMailBody = objReg.Replace(grpMailBody,"")
 
 
 IF wscript.arguments.count = 3 Then
-	WScript.StdOut.Write(grpMailBody)
+	WScript.StdOut.WriteLine(grpMailBody)
 
 else
 	msgbox grpMailBody
 
 End IF
+
+'Quit
+outlookApp.Quit
 
 'Clear the memory
 Set WshShell = Nothing
