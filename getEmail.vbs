@@ -44,9 +44,11 @@ scriptdir = CreateObject("Scripting.FileSystemObject").GetParentFolderName(WScri
 
 ' 로그남기는 vbs 파일 호출 
 pathVbsAppendLog = """" & scriptdir & "\" & "MDG2004_appendLog.vbs" & """"
+' msgbox pathVbsAppendLog
+
 
 ' 로그 남기기
-textLog = "실행 VBScript"
+textLog = "실행 VBScript > 파라미터 확인: " & folderOutlook & ", " & findText & ", " & pathLogFileName
 WshShell.Run(pathVbsAppendLog + " " + pathLogFileName + " " + Chr(34) & textLog & Chr(34))
 
 
