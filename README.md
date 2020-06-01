@@ -1,5 +1,10 @@
 
 ## Automation Anywhere 에서 사용위함
+- AA에서 호출해서 사용했는데 AA RunScript로 사용할경우 기본적으로 Parameter가 하나 전달하는것을 확인함
+- 그 파라미터는 파일자체 Path 를 전달함을 확인
+- 그리고 AA Runscript 통해 VBScript에서 다시 vbs를 실행한 경우 에러발생함..
+
+
 ## Files 설명
 
 1. getEmail.vbs
@@ -15,6 +20,8 @@
 3. sendEmail.vbs
     - 파라미터 5개 제목, 내용, To, CC, 첨부파일
     - To, CC, 첨부파일은 모두 ;로 구분함. 여러개 인자 전달 가능
+
+4. getEmail.vbs + appendLog.vbs   csv 파일 남기는 함수로 변경하기 (AA 에러 때문에)
 ---
 
 ###### MEMO (날짜 구분 가능, 첨부파일 다운 가능, 메일제목이나 본문 키워드 포함여부 가능, 읽음처리 가능, 삭제가능)
