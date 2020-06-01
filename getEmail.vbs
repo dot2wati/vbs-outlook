@@ -29,7 +29,7 @@ elseif wscript.arguments.count = 0 then
 	' 메일에 포함된 텍스트
 	findText = "MDG2004"
 	' 메일위치
-	folderOutlook = "RPA\MDG2004" 
+	folderOutlook = "RPA\MDG\MDG2004" 
 	pathLogFileName = pathUserProfile & "\Desktop\getEmailTest.log"
 	
 else
@@ -55,9 +55,13 @@ Set outlookApp = CreateObject("Outlook.Application")
 Set outlookMAPI = outlookApp.GetNameSpace("MAPI")
 
 
-' 받은편지함 폴더 > RPA > MDG2004
 navFolder = Split(folderOutlook,"\")
-Set outlookFolder = outlookMAPI.GetDefaultFolder(6)
+
+' 받은편지함 폴더
+' Set outlookFolder = outlookMAPI.GetDefaultFolder(6)
+
+' 받은편지함 상위 폴더
+Set outlookFolder = outlookMAPI.GetDefaultFolder(6).Parent
 for each folderName in navFolder
 	Set outlookFolder = outlookFolder.Folders(folderName)
 next
