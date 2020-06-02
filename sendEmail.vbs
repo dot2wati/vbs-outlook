@@ -8,11 +8,11 @@ Dim strFileText
 Dim objFileToRead    
 
 
-if wscript.arguments.count = 5 then 
-    mySubject = WScript.Arguments(0)
-    myBody = WScript.Arguments(1)
-    myTo = WScript.Arguments(2)
-    myCC = WScript.Arguments(3)
+if wscript.arguments.count >= 5 then 
+    myTo = WScript.Arguments(0)
+    myCC = WScript.Arguments(1)
+    mySubject = WScript.Arguments(2)
+    myBody = WScript.Arguments(3)
     myAttachments = WScript.Arguments(4)
 
 else
@@ -49,7 +49,7 @@ With myMail
     .Send    
 End With    
 
-myOutlook.Quit
+'myOutlook.Quit
 
 'Clear the memory
 Set myOutlook = Nothing    
