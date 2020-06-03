@@ -7,11 +7,21 @@
 sub appenText(logFileName, logText)
     ' OpenTextFile 8이면 Append 옵션
     Set objFileToWrite = CreateObject("Scripting.FileSystemObject").OpenTextFile(pathLogFileName,8,true)
-    
+
+	' 정규식 적용
+	' Set objReg=CreateObject("vbscript.regexp")
+	' objReg.Pattern = "\s*"
+	' objReg.Global = True
+	' logText = objReg.Replace(logText,"")
+
     writeData = logText
     
     objFileToWrite.WriteLine(writeData)
-    objFileToWrite.Close
+	objFileToWrite.Close
+	
+	'Clear the memory
+	Set objFileToWrite = Nothing
+	Set objReg = Nothing
 End sub
 
 
@@ -23,7 +33,7 @@ pathUserProfile = WshShell.ExpandEnvironmentStrings("%UserProfile%")
 pathLogFileName = pathUserProfile & "\Desktop\getEmailTest.csv"
 
 ' ------------------------------메일 읽기
-' 메일에 포함된 텍스트
+' 메일에 구분 위한 텍스트
 findText = "MDG2004"
 ' 메일위치
 folderOutlook = "RPA\MDG\MDG2004" 
@@ -40,22 +50,31 @@ for each folderName in navFolder
 	Set outlookFolder = outlookFolder.Folders(folderName)
 next
 
-' 폴더의 메일 가져오기
-Set allEmails = outlookFolder.Items
-    
+' 폴더의 메일 확인
+' 여기서 해당 메일을 Delete 할 경우 전체 For Each 반복문 횟수도 줄어듦
+' 오래된 메일 부터 수행함
 For Each email In outlookFolder.Items
-	if email.subject = findText Then
+	' if InStr(email.subject,findText) 	' 텍스트 포함 조건 
+	if email.subject = findText Then 	' 텍스트 일치 조건
 		' 로그 남기기 호출
 		textLog = email.body
 		appenText pathLogFileName, textLog
 
-		' 해당 메일 삭제
-		' email.Delete
-		
     End IF
-    
 Next
+
+' 폴더의 조건에 해당하는 모든 메일 삭제
+' step은 루프를 통해 매번 counter가 증가 하는 양입니다.
+' 최근메일부터 수행 // 최근메일_num To 1 Step -1
+For i = outlookFolder.Items.Count To 1 Step -1 
+	If (outlookFolder.Items(i).Subject) = findText Then
+		outlookFolder.Items(i).Delete
+
+	End If 
+Next 
 
 
 'Clear the memory
-Set objFileToWrite = Nothing
+Set outlookMAPI = Nothing
+Set outlookApp = Nothing
+Set outlookMAPI = Nothing
