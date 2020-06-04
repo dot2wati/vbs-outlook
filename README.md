@@ -1,8 +1,8 @@
 
 ## Automation Anywhere 에서 사용위함
-- AA에서 호출해서 사용했는데 AA RunScript로 사용할경우 기본적으로 Parameter가 하나 전달하는것을 확인함
+- AA에서 호출해서 사용했는데 AA Run Script로 사용할경우 기본적으로 Parameter가 하나 전달하는것을 확인함
 - 그 파라미터는 파일자체 Path 를 전달함을 확인
-- 그리고 AA Runscript 통해 VBScript에서 다시 vbs를 실행한 경우 에러발생함..
+- 그리고 AA Run Script 통해 호출된 VBScript파일 내부에서 다른 .vbs 파일을 실행한 경우 에러발생함..
 
 
 ## Files 설명
