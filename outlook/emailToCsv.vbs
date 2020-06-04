@@ -4,24 +4,21 @@
 ' ------------------------------------------------------------------
 
 'function은 리턴값 사용가능, sub은 없음
-sub appenText(logFileName, logText)
+sub appenText(pathMyFile, logText)
     ' OpenTextFile 8이면 Append 옵션
-    Set objFileToWrite = CreateObject("Scripting.FileSystemObject").OpenTextFile(pathLogFileName,8,true)
+    Set objFileToWrite = CreateObject("Scripting.FileSystemObject").OpenTextFile(pathMyFile,8,true)
 
 	' 정규식 적용
-	' Set objReg=CreateObject("vbscript.regexp")
-	' objReg.Pattern = "\s*"
-	' objReg.Global = True
-	' logText = objReg.Replace(logText,"")
+	Set objReg=CreateObject("vbscript.regexp")
+	objReg.Pattern = "[\s\r\n]+"
+	objReg.Global = True
+	logText = objReg.Replace(logText," ")
 
     writeData = logText
     
     objFileToWrite.WriteLine(writeData)
 	objFileToWrite.Close
 	
-	'Clear the memory
-	Set objFileToWrite = Nothing
-	Set objReg = Nothing
 End sub
 
 
@@ -30,7 +27,7 @@ End sub
 Set WshShell = WScript.CreateObject("WScript.Shell")
 pathUserProfile = WshShell.ExpandEnvironmentStrings("%UserProfile%")
 ' 결과파일 > 바탕화면 경로 (원하는 경로로 변경하여 사용가능)
-pathLogFileName = pathUserProfile & "\Desktop\getEmailTest.csv"
+pathTextFileName = pathUserProfile & "\Desktop\getEmailTest.csv"
 
 ' ------------------------------메일 읽기
 ' 메일에 구분 위한 텍스트
@@ -56,9 +53,9 @@ next
 For Each email In outlookFolder.Items
 	' if InStr(email.subject,findText) 	' 텍스트 포함 조건 
 	if email.subject = findText Then 	' 텍스트 일치 조건
-		' 로그 남기기 호출
-		textLog = email.body
-		appenText pathLogFileName, textLog
+		' Text 남기기 호출
+		textBody = email.body
+		appenText pathTextFileName, textBody
 
     End IF
 Next
@@ -68,7 +65,7 @@ Next
 ' 최근메일부터 수행 // 최근메일_num To 1 Step -1
 For i = outlookFolder.Items.Count To 1 Step -1 
 	If (outlookFolder.Items(i).Subject) = findText Then
-		outlookFolder.Items(i).Delete
+		' outlookFolder.Items(i).Delete
 
 	End If 
 Next 
@@ -77,4 +74,5 @@ Next
 'Clear the memory
 Set outlookMAPI = Nothing
 Set outlookApp = Nothing
-Set outlookMAPI = Nothing
+Set objFileToWrite = Nothing
+Set objReg = Nothing
