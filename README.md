@@ -24,7 +24,7 @@
 
 ---
 
-###### MEMO (날짜 구분 가능, 첨부파일 다운 가능, 메일제목이나 본문 키워드 포함여부 가능, 읽음처리 가능, 삭제가능)
+###### MEMO - 날짜 구분 가능, 첨부파일 다운 가능, 메일제목이나 본문 키워드 포함여부 가능, 읽음처리 가능, 삭제가능
 - [MailItem object](https://docs.microsoft.com/en-us/office/vba/api/outlook.mailitem)
 - DateAdd
 - email.Attachments.Count
