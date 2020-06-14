@@ -34,6 +34,13 @@ msgbox objReg.Test(myText)
 
 ' https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/collection-object
 ' https://docs.microsoft.com/en-us/office/vba/language/reference/user-interface-help/item-method-visual-basic-for-applications
+
+'Execute() 메서드는 Test() 메서드와 달리 실행결과를 Collection 객체 형식으로 리턴해 주므로 굳
+
+'공백제외한 문자들
+objReg.Pattern = "[^\s]+"
+objReg.Global = True
+
 Set myResults = objReg.Execute(myText)
 msgbox myResults.Count
 msgbox myResults.Item(0)
