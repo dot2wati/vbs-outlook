@@ -1,5 +1,6 @@
 ' Test Regexp 
 ' http://blog.naver.com/PostView.nhn?blogId=jjjhyeok&logNo=20047243896&parentCategoryNo=33&viewDate=&currentPage=1&listtype=0
+' http://www.egocube.pe.kr/lecture/content/asp-script/200204290001
 
 ' 정규식 공백 제거
 Set objReg = CreateObject("vbscript.regexp")
