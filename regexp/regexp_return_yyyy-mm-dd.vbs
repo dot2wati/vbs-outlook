@@ -1,23 +1,23 @@
-' ³â¿ùÀÏ ¹ŞÀ½
+' ë…„ì›”ì¼ ë°›ìŒ
 
-' 1. ÀÏ´Ü ÅØ½ºÆ®¿¡¼­ [\\\.-³â¿ù]Àº -·Î Ä¡È¯ ¸¶Áö¸· ¹®ÀÚÀÎµ¥ ¼ıÀÚ°¡ ¾Æ´Ï¸é ºó¹®ÀÚ·Î Ä¡È¯
-' 2. \d{2}-\d{1,2}-\d{1,2}|\d{4}-\d{1,2}-\d{1,2}ÀÇ ÇüÅÂ°¡ Á¸ÀçÇÏ¸é ³â¿ùÀÏ Á¸Àç
-' 3. Test ¸Ş¼­µå·Î ÇØ´ç Á¤±Ô½ÄÀÌ Á¸ÀçÇÏ´ÂÁö È®ÀÎ °¡´É
-' 4. Á¸ÀçÇÏ¸é Execute ¸Ş¼­µå·Î ³â-¿ù-ÀÏ¿¡ ÇØ´çÇÏ´Â ºÎºĞ °¡Á®¿È
-' 5. ÀÚ¸®¼ö ¸ÂÃã ³âµµ´Â 4ÀÚ¸® ¿ùÀº 2ÀÚ¸® ÀÏµµ 2ÀÚ¸®
+' 1. ì¼ë‹¨ í…ìŠ¤íŠ¸ì—ì„œ [\\\.-ë…„ì›”]ì€ -ë¡œ ì¹˜í™˜ ë§ˆì§€ë§‰ ë¬¸ìì¸ë° ìˆ«ìê°€ ì•„ë‹ˆë©´ ë¹ˆë¬¸ìë¡œ ì¹˜í™˜
+' 2. \d{2}-\d{1,2}-\d{1,2}|\d{4}-\d{1,2}-\d{1,2}ì˜ í˜•íƒœê°€ ì¡´ì¬í•˜ë©´ ë…„ì›”ì¼ ì¡´ì¬
+' 3. Test ë©”ì„œë“œë¡œ í•´ë‹¹ ì •ê·œì‹ì´ ì¡´ì¬í•˜ëŠ”ì§€ í™•ì¸ ê°€ëŠ¥
+' 4. ì¡´ì¬í•˜ë©´ Execute ë©”ì„œë“œë¡œ ë…„-ì›”-ì¼ì— í•´ë‹¹í•˜ëŠ” ë¶€ë¶„ ê°€ì ¸ì˜´
+' 5. ìë¦¬ìˆ˜ ë§ì¶¤ ë…„ë„ëŠ” 4ìë¦¬ ì›”ì€ 2ìë¦¬ ì¼ë„ 2ìë¦¬
 
-' ÀÌ»Ú°Ô Return yyyy-mm-dd ÇüÅÂ·Î AA¿¡¼­´Â ÀúÇüÅÂ °íÁ¤À¸·Î °¡Á¤ÇÏ°í È°¿ë
+' ì´ì˜ê²Œ Return yyyy-mm-dd í˜•íƒœë¡œ AAì—ì„œëŠ” ì €í˜•íƒœ ê³ ì •ìœ¼ë¡œ ê°€ì •í•˜ê³  í™œìš©
 
 
-' Execute() ¸Ş¼­µå´Â Test() ¸Ş¼­µå¿Í ´Ş¸® ½ÇÇà°á°ú¸¦ Collection °´Ã¼ Çü½ÄÀ¸·Î ¸®ÅÏÇØ ÁÖ¹Ç·Î ±»
+' Execute() ë©”ì„œë“œëŠ” Test() ë©”ì„œë“œì™€ ë‹¬ë¦¬ ì‹¤í–‰ê²°ê³¼ë¥¼ Collection ê°ì²´ í˜•ì‹ìœ¼ë¡œ ë¦¬í„´í•´ ì£¼ë¯€ë¡œ êµ³
 
 Set objReg = CreateObject("vbscript.regexp")
 
-' ³â¿ùÀÏ ¿¹½Ã 
+' ë…„ì›”ì¼ ì˜ˆì‹œ 
 ' 2020-05-08
 ' 20-5-8
-' ³âµµ°¡ 2ÀÚ¸® 4ÀÚ¸®°¡´É
-' ¿ù,ÀÏÀº 2ÀÚ¸® 1ÀÚ¸® °¡´É
+' ë…„ë„ê°€ 2ìë¦¬ 4ìë¦¬ê°€ëŠ¥
+' ì›”,ì¼ì€ 2ìë¦¬ 1ìë¦¬ ê°€ëŠ¥
 objReg.Pattern = "^\d{2}-\d{1,2}-\d{1,2}$|^\d{4}-\d{1,2}-\d{1,2}$"
 objReg.Global = True
 
@@ -25,32 +25,32 @@ objReg.Global = True
 ' myDate = "  20200608  "
 myDate = WScript.Arguments(0)
 
-' Àü´Ş¹ŞÀº Date °ª Trim
+' ì „ë‹¬ë°›ì€ Date ê°’ Trim
 myDate = Trim(myDate)
 
-' ÇØ´ç Á¤±Ô½ÄÀ» Æ÷ÇÔÇÏ°í ÀÖ´ÂÁö È®ÀÎ
+' í•´ë‹¹ ì •ê·œì‹ì„ í¬í•¨í•˜ê³  ìˆëŠ”ì§€ í™•ì¸
 checkPattern = objReg.Test(myDate)
 
 ' True / Flase
 ' msgbox checkPattern
 
-' vbs Á¤±Ô½ÄÀº ÈÄ¹æÅ½»öÀÌ ¾ÈµÊ
-' Execute ¸Å¼­µå´Â "Set º¯¼ö¸í"À¸·Î °á°ú ¹ŞÀ½ ¸ÅÄªµÇ´Â ¸ğµç °ªÀ» ¹İÈ¯ÇÔ (ÄÃ·º¼Ç °³Ã¼)
-' Replace ¸Å¼­µå´Â º¯¼ö¿¡ ¹Ù·Î ÇÒ´çÇÏ¿© °á°ú ¹ŞÀ½
+' vbs ì •ê·œì‹ì€ í›„ë°©íƒìƒ‰ì´ ì•ˆë¨
+' Execute ë§¤ì„œë“œëŠ” "Set ë³€ìˆ˜ëª…"ìœ¼ë¡œ ê²°ê³¼ ë°›ìŒ ë§¤ì¹­ë˜ëŠ” ëª¨ë“  ê°’ì„ ë°˜í™˜í•¨ (ì»¬ë ‰ì…˜ ê°œì²´)
+' Replace ë§¤ì„œë“œëŠ” ë³€ìˆ˜ì— ë°”ë¡œ í• ë‹¹í•˜ì—¬ ê²°ê³¼ ë°›ìŒ
 IF checkPattern = True Then
 	
-	' ³âµµ ÃßÃâ
+	' ë…„ë„ ì¶”ì¶œ
 	objReg.Pattern = "^\d{2}(?=-)|^\d{4}(?=-)"
 	Set myYearCollection = objReg.Execute(myDate)
 	myYear = myYearCollection.Item(0)
 	' msgbox myYear
 	
-	' ¿ù ÃßÃâ
+	' ì›” ì¶”ì¶œ
 	objReg.Pattern = "^\d+-|-\d+$"
 	myMonth = objReg.Replace(myDate,"")
 	' msgbox myMonth
 		
-	' ÀÏ ÃßÃâ
+	' ì¼ ì¶”ì¶œ
 	objReg.Pattern = "^\d+-\d+-"
 	myDay = objReg.Replace(myDate,"")
 	' msgbox myMonth
@@ -69,7 +69,7 @@ IF checkPattern = True Then
 	
 	myDate = myYear & "-" & myMonth & "-" & myDay
 	
-	' °ª ¸®ÅÏ ¹× Quit
+	' ê°’ ë¦¬í„´ ë° Quit
 	' MsgBox myDate
 	WScript.StdOut.WriteLine(myDate)
 	
@@ -78,16 +78,16 @@ IF checkPattern = True Then
 	
 End If
 
-' ¼ıÀÚ·Î¸¸ 6ÀÚ¸® È¤Àº 8ÀÚ¸®ÀÎ °æ¿ì Å½»ö
+' ìˆ«ìë¡œë§Œ 6ìë¦¬ í˜¹ì€ 8ìë¦¬ì¸ ê²½ìš° íƒìƒ‰
 objReg.Pattern = "^\d{6}$|^\d{8}$"
 
-' ÇØ´ç Á¤±Ô½ÄÀ» Æ÷ÇÔÇÏ°í ÀÖ´ÂÁö È®ÀÎ
+' í•´ë‹¹ ì •ê·œì‹ì„ í¬í•¨í•˜ê³  ìˆëŠ”ì§€ í™•ì¸
 checkPattern = objReg.Test(myDate)
 
-' Date °ªÀÌ 6ÀÚ¸® È¤Àº 8ÀÚ¸®ÀÓ
+' Date ê°’ì´ 6ìë¦¬ í˜¹ì€ 8ìë¦¬ì„
 IF checkPattern = True Then
 
-	' 6ÀÚ¸®ÀÎ °æ¿ì
+	' 6ìë¦¬ì¸ ê²½ìš°
 	IF Len(myDate) = 6 Then
 		myYear = Mid(myDate,1,2)
 		myMonth = Mid(myDate,3,2)
@@ -99,7 +99,7 @@ IF checkPattern = True Then
 		
 		myDate = myYear & "-" & myMonth & "-" & myDay
 		
-		' °ª ¸®ÅÏ ¹× Quit
+		' ê°’ ë¦¬í„´ ë° Quit
 		' MsgBox myDate
 		WScript.StdOut.WriteLine(myDate)
 		Set objReg = Nothing
@@ -107,7 +107,7 @@ IF checkPattern = True Then
 		
 	End If
 	
-	' 8ÀÚ¸®ÀÎ °æ¿ì
+	' 8ìë¦¬ì¸ ê²½ìš°
 	IF Len(myDate) = 8 Then
 		myYear = Mid(myDate,1,4)
 		myMonth = Mid(myDate,5,2)
@@ -115,7 +115,7 @@ IF checkPattern = True Then
 		
 		myDate = myYear & "-" & myMonth & "-" & myDay
 		
-		' °ª ¸®ÅÏ ¹× Quit
+		' ê°’ ë¦¬í„´ ë° Quit
 		' MsgBox myDate
 		WScript.StdOut.WriteLine(myDate)
 		Set objReg = Nothing
@@ -125,9 +125,9 @@ IF checkPattern = True Then
 
 End If
 
-'ÇØ´ç»çÇ×¾øÀ» ¶§
-' °ª ¸®ÅÏ ¹× Quit
-myTime = "-1"
+'í•´ë‹¹ì‚¬í•­ì—†ì„ ë•Œ
+' ê°’ ë¦¬í„´ ë° Quit
+myDate = "-1"
 WScript.StdOut.WriteLine(myDate)
 Set objReg = Nothing
 WScript.Quit
