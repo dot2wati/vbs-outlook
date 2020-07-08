@@ -29,3 +29,7 @@
 - DateAdd
 - email.Attachments.Count
 - InStr(email.subject,"keyword")
+
+
+## 참고
+- [에러핸들링](https://stackoverflow.com/questions/157747/vbscript-using-error-handling)
