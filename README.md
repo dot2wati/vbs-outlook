@@ -1,4 +1,7 @@
 
+### 주의사항
+- AA 호출시 Prameter 구분기호는 🚩**공백**🚩 임
+
 ## 🥨Automation Anywhere 에서 사용위함
 - AA에서 호출해서 사용했는데 AA Run Script로 사용할경우 기본적으로 Parameter가 하나 전달하는것을 확인함
 - 그 파라미터는 파일자체 Path 를 전달함을 확인
